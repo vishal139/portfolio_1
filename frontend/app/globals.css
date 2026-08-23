@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.home {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a0533, #000000, #111a45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* Center content */
+.content {
+  position: relative;
+  z-index: 2;
+
+  text-align: center;
+  padding: 20px;
+}
+
+.intro {
+  color: #d8b4fe;
+  font-size: 18px;
+  letter-spacing: 8px;
+  margin-bottom: 20px;
+}
+
+.content h1 {
+  font-size: clamp(60px, 10vw, 130px);
+  color: white;
+  margin-bottom: 25px;
+  line-height: 1;
+}
+
+.content h1 span {
+  background: linear-gradient(90deg, #c084fc, #f472b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  color: #d1d5db;
+  font-size: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+.content button {
+  margin-top: 40px;
+
+  padding: 15px 32px;
+
+  border: none;
+  border-radius: 50px;
+
+  background: white;
+  color: black;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: transform 0.3s ease;
+}
+
+.content button:hover {
+  transform: scale(1.08);
+}
+
+/* Background glow */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+
+  opacity: 0.4;
+}
+
+.glow-one {
+  width: 350px;
+  height: 350px;
+
+  background: #9333ea;
+
+  top: -100px;
+  left: -100px;
+}
+
+.glow-two {
+  width: 450px;
+  height: 450px;
+
+  background: #ec4899;
+
+  bottom: -150px;
+  right: -100px;
+}
