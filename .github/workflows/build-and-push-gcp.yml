@@ -1,61 +1,22 @@
 name: Build and Push GCP Images
 
 on:
-  pull_request:
-    paths:
-      - "api/**"
-      - "frontend/**"
-      - "docker-compose.yml"
-      - ".github/workflows/build-and-push-gcp.yml"
-  push:
-    branches:
-      - main
-    paths:
-      - "api/**"
-      - "frontend/**"
-      - "docker-compose.yml"
-      - ".github/workflows/build-and-push-gcp.yml"
   workflow_dispatch:
+    inputs:
+      environment:
+        description: Docker stage and deployment environment to build
+        required: true
+        type: choice
+        options:
+          - dev
+          - prod
+        default: dev
 
 jobs:
-  build:
-    name: Build images for PRs
-    if: github.event_name == 'pull_request'
+  build-and-push:
+    name: Build and push ${{ matrix.service }} (${{ inputs.environment }})
     runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - service: api
-            context: ./api
-            dockerfile: ./api/Dockerfile
-          - service: frontend
-            context: ./frontend
-            dockerfile: ./frontend/Dockerfile
-
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build ${{ matrix.service }} image
-        uses: docker/build-push-action@v6
-        with:
-          context: ${{ matrix.context }}
-          file: ${{ matrix.dockerfile }}
-          target: prod
-          push: false
-          tags: ${{ matrix.service }}:${{ github.sha }}
-          cache-from: type=gha,scope=${{ matrix.service }}
-          cache-to: type=gha,mode=max,scope=${{ matrix.service }}
-
-  push:
-    name: Build and push to Artifact Registry
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
 
     permissions:
       contents: read
@@ -73,7 +34,7 @@ jobs:
             dockerfile: ./frontend/Dockerfile
 
     steps:
-      - name: Check out repository
+      - name: Check out selected branch
         uses: actions/checkout@v4
 
       - name: Authenticate to Google Cloud
@@ -83,9 +44,6 @@ jobs:
           token_format: access_token
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-
-      - name: Set up gcloud
-        uses: google-github-actions/setup-gcloud@v2
 
       - name: Log in to Artifact Registry
         uses: docker/login-action@v3
@@ -102,10 +60,12 @@ jobs:
         with:
           context: ${{ matrix.context }}
           file: ${{ matrix.dockerfile }}
-          target: prod
+          target: ${{ inputs.environment }}
           push: true
+          build-args: |
+            NEXT_PUBLIC_API_BASE_URL=${{ vars.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:5001' }}
           tags: |
-            ${{ secrets.GAR_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/${{ matrix.service }}:${{ github.sha }}
-            ${{ secrets.GAR_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/${{ matrix.service }}:latest
-          cache-from: type=gha,scope=${{ matrix.service }}
-          cache-to: type=gha,mode=max,scope=${{ matrix.service }}
+            ${{ secrets.GAR_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/${{ matrix.service }}:${{ inputs.environment }}
+            ${{ secrets.GAR_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/${{ secrets.GAR_REPOSITORY }}/${{ matrix.service }}:${{ inputs.environment }}-${{ github.sha }}
+          cache-from: type=gha,scope=${{ matrix.service }}-${{ inputs.environment }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.service }}-${{ inputs.environment }}
