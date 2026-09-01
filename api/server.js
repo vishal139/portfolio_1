@@ -4,10 +4,11 @@ import cors from "cors";
 const app = express();
 
 const PORT = 5001;
+const CORS_ORIGIN = process.env.CORS_ORIGIN ?? "http://localhost:3000";
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: CORS_ORIGIN,
   })
 );
 

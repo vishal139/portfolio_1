@@ -13,22 +13,22 @@ type Profile = {
 export default function Home() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(false);
+  const apiBaseUrl =
+    process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5001";
 
-const handleExplore = async () => {
-  setLoading(true);
+  const handleExplore = async () => {
+    setLoading(true);
 
-  try {
-    const response = await axios.get(
-      "http://localhost:5001/api/profile"
-    );
+    try {
+      const response = await axios.get(`${apiBaseUrl}/api/profile`);
 
-    setProfile(response.data);
-  } catch (error) {
-    console.error("Failed to fetch profile:", error);
-  } finally {
-    setLoading(false);
-  }
-};
+      setProfile(response.data);
+    } catch (error) {
+      console.error("Failed to fetch profile:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <main className="home">

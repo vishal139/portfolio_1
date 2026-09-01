@@ -3,6 +3,7 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
+      target: dev
     container_name: my-api
     ports:
       - "5001:5001"
@@ -14,6 +15,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      target: dev
     container_name: my-frontend
     ports:
       - "3000:3000"
