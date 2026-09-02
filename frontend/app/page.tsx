@@ -14,7 +14,10 @@ export default function Home() {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(false);
   const apiBaseUrl =
-    process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:5001";
+    process.env.NEXT_PUBLIC_API_BASE_URL ??
+    (process.env.NODE_ENV === "development"
+      ? "http://localhost:5001"
+      : "https://api-569006565187.asia-south1.run.app");
 
   const handleExplore = async () => {
     setLoading(true);
