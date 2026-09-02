@@ -10,7 +10,7 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 5001
+EXPOSE 8080
 
 CMD ["npm", "run", "dev"]
 
@@ -22,6 +22,6 @@ RUN npm ci --omit=dev
 
 COPY . .
 
-EXPOSE 5001
+EXPOSE 8080
 
 CMD ["npm", "start"]

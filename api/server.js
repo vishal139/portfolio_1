@@ -3,7 +3,7 @@ import cors from "cors";
 
 const app = express();
 
-const PORT = 5001;
+const PORT = process.env.PORT || 5001;
 const CORS_ORIGIN = process.env.CORS_ORIGIN ?? "http://localhost:3000";
 
 app.use(
@@ -21,6 +21,6 @@ app.get("/api/profile", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
 });
