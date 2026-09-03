@@ -11,7 +11,42 @@ const capabilities = [
   ["02", "Full-stack systems", "Reliable frontends and APIs connected into products that are ready to grow."],
   ["03", "Fast iteration", "A practical build process that turns a rough idea into a polished experience quickly."],
 ];
-const principles = ["Curious by default", "Detail in the right places", "Built for real people"];
+const experience = [
+  {
+    company: "Oorja",
+    role: "Full Stack Developer",
+    period: "2024 - Present",
+    summary: "Building battery engineering software that turns complex simulations into clear, data-driven insight.",
+    highlights: [
+      "Integrating physics-based mathematical models and simulations for accurate battery engineering insights.",
+      "Developing Python REST APIs for efficient data retrieval, processing, and analysis.",
+      "Leading Angular frontend development for intuitive interfaces around complex battery simulations.",
+      "Implementing Plotly visualizations for plots, key performance indicators, and simulation results.",
+      "Deploying and managing scalable applications on Google Cloud Platform (GCP).",
+      "Using GitHub Copilot to accelerate development workflows and maintain code quality.",
+      "Optimizing database queries, reducing latency, and improving data handling for large datasets.",
+      "Collaborating with battery engineers, data scientists, and stakeholders on real-world requirements.",
+    ],
+  },
+  {
+    company: "Better Wealth Technologies Pvt. Ltd.",
+    role: "Full Stack Developer",
+    period: "2021 - 2023",
+    summary: "Developing financial products that connect real-time market data with useful customer experiences.",
+    highlights: [
+      "Designed and deployed a real-time alert system with Amazon SQS and Twilio for critical market events.",
+      "Led development of a stock advisory platform with interactive tables, filtering, search, pagination, and sorting.",
+      "Built intuitive pop-up forms that streamlined user interaction and improved conversion opportunities.",
+      "Integrated Google Analytics and Google Tag Manager with custom events, goals, and conversion tracking.",
+      "Developed an admin dashboard with React.js and Node.js, including authentication, visualizations, and CRUD operations.",
+    ],
+  },
+];
+const education = [
+  { year: "2021", degree: "B.Tech. in Mechanical Engineering", institute: "IIT Kharagpur", result: "CGPA: 6.8" },
+  { year: "2017", degree: "All India Senior School Certificate Examination", institute: "JNV Kottayam", result: "90%" },
+  { year: "2015", degree: "All India Secondary School Examination", institute: "JNV Ranchi", result: "CGPA: 10" },
+];
 const expertiseGroups = [
   {
     index: "01 / Languages",
@@ -71,13 +106,12 @@ export default function Home() {
   const name = profile?.name ?? "Vishal Kachhap";
   const role = profile?.role ?? "Full Stack Developer";
   const bio = "I am a full-stack developer who enjoys turning complex problems into reliable, thoughtful software. I build across the frontend and backend, with a focus on clean interfaces, scalable APIs, and systems that are easy to maintain.";
-  const skills = profile?.skills ?? ["React", "Next.js", "Node.js", "Express", "Python"];
 
   return (
     <main>
       <nav className="nav-shell" aria-label="Main navigation">
         <a className="wordmark" href="#top" aria-label="Vishal Kachhap home">VK<span>.</span></a>
-        <div className="nav-links"><a href="#about">About</a><a href="#expertise">Expertise</a><a href="#articles">Articles</a></div>
+        <div className="nav-links"><a href="#about">About</a><a href="#experience">Experience</a><a href="#education">Education</a><a href="#expertise">Expertise</a><a href="#articles">Articles</a></div>
         <a className="nav-availability" href="/Vishal_Kachhap_CV.pdf" download><span className="status-dot" /> Download CV</a>
       </nav>
 
@@ -89,7 +123,7 @@ export default function Home() {
         </div>
         <div className="hero-art reveal reveal-delay">
           <div className="terminal-bar"><span /><span /><span /><b>vishal.dev</b></div>
-          <div className="code-lines"><p><i>const</i> developer = <strong>&quot;Vishal&quot;</strong>;</p><p><i>const</i> stack = [<strong>&quot;React&quot;</strong>, <strong>&quot;Node&quot;</strong>];</p><p className="code-gap" /><p><i>return</i> build({"{"}</p><p className="indent">cleanInterfaces: <strong>true</strong>,</p><p className="indent">reliableSystems: <strong>true</strong>,</p><p className="indent">goodQuestions: <strong>true</strong></p><p>{"}"});</p></div>
+          <div className="code-lines"><p><i>const</i> developer = <strong>&quot;Vishal&quot;</strong>;</p><p><i>const</i> stack = {"{"}</p><p className="indent">languages: [<strong>&quot;TypeScript&quot;</strong>, <strong>&quot;Python&quot;</strong>],</p><p className="indent">frontend: [<strong>&quot;React&quot;</strong>, <strong>&quot;Angular&quot;</strong>],</p><p className="indent">backend: [<strong>&quot;Node.js&quot;</strong>, <strong>&quot;NestJS&quot;</strong>],</p><p className="indent">infra: [<strong>&quot;Docker&quot;</strong>, <strong>&quot;Kafka&quot;</strong>]</p><p>{"}"};</p><p className="code-gap" /><p><i>build</i>(<strong>&quot;scalable systems&quot;</strong>);</p></div>
           <div className="art-caption">{"// currently shipping"}</div><div className="art-side-note">status: online<br />location: india</div>
         </div>
       </section>
@@ -97,15 +131,31 @@ export default function Home() {
       <section className="about section-shell" id="about">
         <div className="section-label"><span>01</span> About me</div>
         <div className="about-grid"><h2>Software should be clear, useful, and <em>built to last.</em></h2>
-          <div className="portrait-wrap"><Image src="/profile-placeholder.png" alt="Temporary profile portrait" fill sizes="(max-width: 700px) 100vw, 24vw" /><span>Temporary profile image</span></div>
+          <div className="portrait-wrap"><Image src="/vishalkachhap.jpeg" alt="Vishal Kachhap profile portrait" fill sizes="(max-width: 700px) 100vw, 24vw" /></div>
           <div className="about-copy"><div className="profile-kicker"><span /> Full Stack Developer</div><p>{bio}</p><p>I work across the stack, from accessible React interfaces to Node.js APIs. I care about maintainable code, fast feedback loops, and solving the right problem before writing the first line.</p>
-            <div className="tech-list">{skills.map((skill) => <span key={skill}>{skill}</span>)}</div>
           </div>
         </div>
       </section>
 
+      <section className="experience section-shell" id="experience">
+        <div className="section-label"><span>02</span> Work experience</div>
+        <div className="experience-list">{experience.map((job) => <article className="experience-item" key={job.company}>
+          <div className="experience-heading"><div><h2>{job.company}</h2><p>{job.role}</p></div><span>{job.period}</span></div>
+          <p className="experience-summary">{job.summary}</p>
+          <ul>{job.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
+        </article>)}</div>
+      </section>
+
+      <section className="education section-shell" id="education">
+        <div className="section-label"><span>03</span> Education</div>
+        <div className="education-heading"><h2>The foundation behind<br /><em>the work.</em></h2><p>A mechanical engineering background shaped how I think: understand the system, find the signal, and build with intent.</p></div>
+        <div className="education-list">{education.map((entry) => <article className="education-row" key={entry.year}>
+          <span className="education-year">{entry.year}</span><div className="education-degree"><h3>{entry.degree}</h3><p>{entry.institute}</p></div><strong>{entry.result}</strong>
+        </article>)}</div>
+      </section>
+
       <section className="expertise section-shell" id="expertise">
-        <div className="section-label"><span>02</span> Technical expertise</div>
+        <div className="section-label"><span>04</span> Technical expertise</div>
         <div className="expertise-heading"><h2>The tools I use to turn ideas into <em>working software.</em></h2><p>Comfortable moving between the browser, the server, and everything that connects them.</p></div>
         <div className="expertise-grid">{expertiseGroups.map((group) => <article className="expertise-card" key={group.index}>
           <span className="expertise-index">{group.index}</span><div className="expertise-icon-wrap"><ExpertiseIcon kind={group.icon} /></div><h3>{group.title}</h3><div className="skill-tags">{group.skills.map(([name, icon]) => <SkillTag key={name} name={name} icon={icon} />)}</div>
@@ -113,23 +163,21 @@ export default function Home() {
       </section>
 
       <section className="capabilities section-shell" id="capabilities">
-        <div className="section-label"><span>03</span> How I work</div>
+        <div className="section-label"><span>05</span> How I work</div>
         <div className="capability-list">{capabilities.map(([number, title, text]) => <article className="capability" key={number}>
-          <span className="capability-number">{number}</span><h3>{title}</h3><p>{text}</p><span className="capability-arrow">↗</span>
+          <span className="capability-number">{number}</span><h3>{title}</h3><p>{text}</p>
         </article>)}</div>
       </section>
 
-      <section className="statement section-shell"><p className="eyebrow">A working philosophy</p><h2>Great software starts with understanding the problem.</h2>
-        <div className="principles">{principles.map((principle, index) => <span key={principle}><b>0{index + 1}</b>{principle}</span>)}</div>
-      </section>
-
-      <section className="articles section-shell" id="articles"><div className="section-label"><span>04</span> Notes from the build</div>
+      <section className="articles section-shell" id="articles"><div className="section-label"><span>06</span> Notes from the build</div>
         <div className="articles-heading"><h2>Things I&apos;m <em>learning.</em></h2><p>A space for practical notes on development, technology, and the ideas I keep coming back to.</p></div>
-        <div className="article-placeholder"><span>Coming soon</span><strong>Developer notes, experiments, and tech deep-dives.</strong><span className="article-arrow">↗</span></div>
+        <div className="article-placeholder"><span>Coming soon</span><strong>Developer notes, experiments, and tech deep-dives.</strong></div>
       </section>
 
-      <section className="contact section-shell" id="contact"><div className="section-label"><span>05</span> Keep in touch</div>
-        <div className="contact-inner"><h2>Thanks for<br /><em>stopping by.</em></h2><a className="contact-link" href="mailto:hello@vishalkachhap.dev">Say hello <span>↗</span></a></div>
+      <section className="contact section-shell" id="contact"><div className="section-label"><span>07</span> Keep in touch</div>
+        <div className="contact-inner"><h2>Thanks for<br /><em>stopping by.</em></h2>
+          <div className="contact-details"><a href="tel:+919113369695"><span className="contact-icon">☎</span>+91 9113369695</a><a href="mailto:vishalkachhap62@gmail.com"><span className="contact-icon">@</span>vishalkachhap62@gmail.com</a><a href="https://github.com/vishal139" rel="noreferrer" target="_blank"><span className="contact-icon">GH</span>GitHub</a><a href="https://www.linkedin.com/in/vishal-kachhap/" rel="noreferrer" target="_blank"><span className="contact-icon">in</span>LinkedIn</a></div>
+        </div>
         <footer><span>Vishal Kachhap</span><span>Built with care / 2025</span></footer>
       </section>
     </main>
