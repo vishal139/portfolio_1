@@ -16,36 +16,35 @@ const experience = [
     company: "Oorja",
     role: "Full Stack Developer",
     period: "2024 - Present",
-    summary: "Building battery engineering software that turns complex simulations into clear, data-driven insight.",
+    summary: "Developing a production battery engineering simulation platform used by 20-30 R&D engineers for faster, more reliable engineering workflows.",
     highlights: [
-      "Integrating physics-based mathematical models and simulations for accurate battery engineering insights.",
-      "Developing Python REST APIs for efficient data retrieval, processing, and analysis.",
-      "Leading Angular frontend development for intuitive interfaces around complex battery simulations.",
-      "Implementing Plotly visualizations for plots, key performance indicators, and simulation results.",
-      "Deploying and managing scalable applications on Google Cloud Platform (GCP).",
-      "Using GitHub Copilot to accelerate development workflows and maintain code quality.",
-      "Optimizing database queries, reducing latency, and improving data handling for large datasets.",
-      "Collaborating with battery engineers, data scientists, and stakeholders on real-world requirements.",
+      "Developed and integrated physics-based mathematical models and simulations into a production application used by 20-30 R&D engineers.",
+      "Developed up to 80% of the application's REST APIs using Python, enabling data retrieval, processing, analysis, and integration between engineering models and application services.",
+      "Optimized database queries and data-processing workflows across millions of records, reducing API query latency by approximately 40% and processing time by 40-50%.",
+      "Led Angular frontend development and implemented interactive Plotly visualizations for simulation results, engineering plots, and KPIs.",
+      "Developed a model-code feature that allows users to duplicate existing models with similar configurations, reducing model setup time from 2-3 hours to a few minutes and significantly improving repetitive engineering workflows.",
+      "Managed application infrastructure and deployment using Docker and GitHub workflows, automating Docker image builds, publishing images to Google Artifact Registry (GAR), and deploying containerized applications on Google Cloud.",
     ],
   },
   {
     company: "Better Wealth Technologies Pvt. Ltd.",
     role: "Full Stack Developer",
     period: "2021 - 2023",
-    summary: "Developing financial products that connect real-time market data with useful customer experiences.",
+    summary: "Developing financial applications and market-data workflows for real-time alerts, stock advisory, and administration.",
     highlights: [
-      "Designed and deployed a real-time alert system with Amazon SQS and Twilio for critical market events.",
-      "Led development of a stock advisory platform with interactive tables, filtering, search, pagination, and sorting.",
-      "Built intuitive pop-up forms that streamlined user interaction and improved conversion opportunities.",
-      "Integrated Google Analytics and Google Tag Manager with custom events, goals, and conversion tracking.",
-      "Developed an admin dashboard with React.js and Node.js, including authentication, visualizations, and CRUD operations.",
+      "Designed and deployed a real-time financial alerting system using Amazon SQS and Twilio to asynchronously process and deliver up to 10,000 notifications per day to users.",
+      "Built reliable event-driven notification actions to deliver financial alerts to the platform's user base.",
+      "Led development of an interactive stock advisory platform used by 20 experts and reaching 10,000 followers, with data coverage across approximately 10,000 stocks.",
+      "Built advanced data tables with filtering, real-time search, pagination, and sorting to enable efficient exploration of large stock datasets.",
+      "Developed user-facing forms and integrated Google Analytics and Google Tag Manager with custom events and conversion tracking to measure user engagement and platform interactions.",
+      "Developed and maintained a React.js and Node.js admin dashboard with authentication, data visualization, and CRUD functionality for user and data management.",
     ],
   },
 ];
 const education = [
-  { year: "2021", degree: "B.Tech. in Mechanical Engineering", institute: "IIT Kharagpur", result: "CGPA: 6.8" },
-  { year: "2017", degree: "All India Senior School Certificate Examination", institute: "JNV Kottayam", result: "90%" },
-  { year: "2015", degree: "All India Secondary School Examination", institute: "JNV Ranchi", result: "CGPA: 10" },
+  { year: "2021", degree: "B.Tech. in Mechanical Engineering", institute: "IIT Kharagpur" },
+  { year: "2017", degree: "All India Senior School Certificate Examination", institute: "JNV Kottayam" },
+  { year: "2015", degree: "All India Secondary School Examination", institute: "JNV Ranchi" },
 ];
 const expertiseGroups = [
   {
@@ -150,7 +149,7 @@ export default function Home() {
         <div className="section-label"><span>03</span> Education</div>
         <div className="education-heading"><h2>The foundation behind<br /><em>the work.</em></h2><p>A mechanical engineering background shaped how I think: understand the system, find the signal, and build with intent.</p></div>
         <div className="education-list">{education.map((entry) => <article className="education-row" key={entry.year}>
-          <span className="education-year">{entry.year}</span><div className="education-degree"><h3>{entry.degree}</h3><p>{entry.institute}</p></div><strong>{entry.result}</strong>
+          <span className="education-year">{entry.year}</span><div className="education-degree"><h3>{entry.degree}</h3><p>{entry.institute}</p></div>
         </article>)}</div>
       </section>
 
